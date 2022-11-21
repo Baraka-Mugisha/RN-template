@@ -1,0 +1,9 @@
+*.pyc
+env/
+.terraform
+.env
+staticfiles/
+postgres-data/
+.bash_history
+.cache/
+.local/

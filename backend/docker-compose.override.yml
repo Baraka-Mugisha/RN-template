@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        SECRET_KEY: ${SECRET_KEY}
+    image: pingme-backend_web
+    env_file: .env
+#    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./:/opt/webapp
+    ports:
+      - "8000:${PORT}"
+  postgres:
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./postgres-data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:5
+    ports:
+      - "6379:6379"
+
+volumes: 
+  postgres-data:
+
